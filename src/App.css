@@ -1,0 +1,120 @@
+:root {
+  --text-color: rgba(255, 255, 255, 0.87);
+}
+
+.email-guesser-app {
+  display: flex;
+  flex-direction: column;
+  gap: 5vh;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  width: 100vw;
+  border-radius: 2rem;
+  background-color: #37474F;
+  color: var(--text-color);
+  padding-top: 5vh;
+}
+
+.app-title {
+  text-shadow: 0 0 10px #fff;
+  font-weight: 100;
+  letter-spacing: 0.5rem;
+}
+
+.guess-form {
+  width: 60vw;
+  max-width: 800px;
+  border: 1px solid #eee;
+  box-shadow: 2px 2px 50px #999 inset, 2px 10px 50px #fff;
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.guess-form:hover {
+  box-shadow: 2px 2px 50px #999 inset, 2px 2px 50px #fff;
+}
+
+.field-container {
+  width: 70%;
+}
+
+.field-label {
+  font-weight: 100;
+  display: block;
+  text-align: left;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+  font-size: 0.6rem;
+  font-style: italic;
+}
+
+.field-input {
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.2rem;
+  width: 100%;
+  background-color: rgb(25 34 35 / 50%);
+  box-shadow: 2px 2px 10px #999, 2px 2px 10px #999 inset, -2px -2px 10px #fff;
+  color: var(--text-color);
+  border: none;
+  border-radius: 1rem;
+  outline: none;
+  transition: box-shadow 0.2s linear;
+  font-size: 1rem;
+}
+
+.field-input:hover {
+  box-shadow: -2px -2px 10px #999, -2px -2px 10px #999 inset, 2px 2px 10px #fff;
+}
+
+.field-input:focus {
+  box-shadow: 0 0 10px #FFF, 0 0 5px #999 inset;
+}
+
+.field-input::placeholder {
+  color: rgba(255, 255, 255, 0.60);
+  opacity: 1;
+}
+
+.disabled .field-input {
+  box-shadow: 0 0 1px #FFF;
+}
+
+.guess-form__submit-button {
+  padding: 0.5em 2em;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 2em;
+  box-shadow: 2px 2px 10px #999, 2px 2px 10px #999 inset, -2px -2px 10px #fff;
+  border: none;
+  background: linear-gradient(90deg, rgba(49,68,69,1) 0%, rgba(49,68,69,0.5) 100%);
+  color: var(--text-color);
+  transition: box-shadow 0.2s linear;
+  margin-top: 2rem;
+}
+
+.guess-form__submit-button:hover:not(:active) {
+  box-shadow: 2px 5px 10px #999, 2px 2px 10px #999 inset, -2px 0px 10px #fff;
+}
+
+.guess-form__submit-button:active {
+  box-shadow: 0 0 2px #FFF;
+}
+
+@media screen and (max-width: 768px) {
+  .guess-form {
+    width: 80vw;
+  }
+
+  .field-input {
+    width: 70vw;
+  }
+
+  .field-container {
+    width: 100%;
+  }
+}
