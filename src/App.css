@@ -118,3 +118,7 @@
     width: 100%;
   }
 }
+
+.error-alert {
+  color: red;
+}

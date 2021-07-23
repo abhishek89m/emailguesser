@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { EmailGuesserService } from './services/EmailGuesserService';
 
-const Field = React.forwardRef(({ label, placeholder }, ref) => {
+const Field = React.forwardRef(({ label, placeholder, disabled, value = '' }, ref) => {
+  const containerClass = `field-container ${disabled ? 'disabled' : ''}`;
+
   return (
-    <div className="field-container">
+    <div className={containerClass}>
       <label className="field-label">{label}</label>
       <input
         ref={ref}
         type="text"
         className="field-input"
         placeholder={placeholder}
+        disabled={disabled}
+        defaultValue={value}
       />
     </div>
   );
@@ -20,6 +24,9 @@ function App() {
   const firstNameRef = React.useRef();
   const lastNameRef = React.useRef();
   const domainRef = React.useRef();
+
+  const [result, setResult] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,11 +39,13 @@ function App() {
     const success = await service.guessEmail({ firstName, lastName, domain });
 
     if (!success) {
-      // Showing errors in console. This is to be shown in screen.
-      console.error(service.errors);
+      setError(Object.values(service.errors)[0]);
+      setResult('');
+      return;
     }
 
-    console.log(service.emailAddress);
+    setResult(service.emailAddress);
+    setError('');
   };
 
   return (
@@ -46,20 +55,23 @@ function App() {
       </header>
       <main>
         <form className="guess-form" onSubmit={handleSubmit}>
+          {error ? <div className="error-alert">{error}</div> : ''}
+
           <Field
             ref={firstNameRef}
             label="FIRST NAME"
-            placeholder="Enter first name" />
+            placeholder="Enter first name"
+          />
 
           <Field
             ref={lastNameRef}
             label="LAST NAME"
-            placeholder="Enter last name" />
+            placeholder="Enter last name"
+          />
 
-          <Field
-            ref={domainRef} 
-            label="DOMAIN" 
-            placeholder="Enter domain" />
+          <Field ref={domainRef} label="DOMAIN" placeholder="Enter domain" />
+
+          <Field label="Result" disabled={true} value={result} />
 
           <div>
             <button className="guess-form__submit-button" type="submit">

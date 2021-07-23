@@ -21,8 +21,14 @@ export class EmailGuesserService {
       this.emailAddress = emailAddress;
 
       return true;
-    } catch (errors) {
-      this.errors = errors;
+    } catch (e) {
+      const { response: { data: { errors } } } = e;
+
+      if (errors) {
+        this.errors = errors;
+      } else {
+        this.errors = e;
+      }
     }
 
     return false;
